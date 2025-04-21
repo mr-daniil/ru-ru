@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тренажер вычитания</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #1a1a1a, #4a4a4a);
+            color: white;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .problem {
+            font-size: 3rem;
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input {
+            font-size: 2rem;
+            width: 120px;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .input:focus {
+            outline: none;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .button {
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #00ff88, #00ccff);
+            color: #1a1a1a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .score {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #00ff88;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            min-height: 30px;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .correct {
+            color: #00ff88;
+            transform: scale(1.1);
+        }
+
+        .incorrect {
+            color: #ff4444;
+            transform: scale(1.1);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .shake {
+            animation: shake 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Реши пример</h1>
+        <div class="problem">
+            <span class="num1">?</span> 
+            <span>-</span>
+            <span class="num2">?</span>
+            <span>=</span>
+            <input type="number" class="input" placeholder="?">
+        </div>
+        <button class="button">Проверить</button>
+        <div class="message"></div>
+        <div class="score">Счёт: 0</div>
+    </div>
+
+    <script>
+        const problem = document.querySelector('.problem');
+        const num1 = document.querySelector('.num1');
+        const num2 = document.querySelector('.num2');
+        const input = document.querySelector('.input');
+        const button = document.querySelector('.button');
+        const message = document.querySelector('.message');
+        const scoreElement = document.querySelector('.score');
+
+        let firstNumber, secondNumber, currentAnswer;
+        let score = 0;
+        let isAnimating = false;
+
+        const getRandomNumbers = () => {
+            firstNumber = Math.floor(Math.random() * 89) + 11; // 11-99
+            secondNumber = Math.floor(Math.random() * (firstNumber - 10)) + 10; // 10 до firstNumber-1
+            currentAnswer = firstNumber - secondNumber;
+        };
+
+        const updateProblem = () => {
+            num1.textContent = firstNumber;
+            num2.textContent = secondNumber;
+            input.value = '';
+            message.textContent = '';
+            input.focus();
+        };
+
+        const showMessage = (text, isCorrect) => {
+            message.className = 'message ' + (isCorrect ? 'correct' : 'incorrect shake');
+            message.textContent = text;
+        };
+
+        const updateScore = () => {
+            scoreElement.textContent = `Счёт: ${score}`;
+            scoreElement.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                scoreElement.style.transform = 'scale(1)';
+            }, 200);
+        };
+
+        const checkAnswer = () => {
+            if (isAnimating) {
+                message.textContent = 'Не спеши!';
+                return;
+            }
+
+            const userAnswer = parseInt(input.value);
+            
+            if (userAnswer === currentAnswer) {
+                score += 5;
+                showMessage('✅ Супер! Верный ответ!', true);
+                input.classList.add('correct');
+            } else {
+                score = Math.max(0, score - 2);
+                showMessage(`❌ Неверно! Иди учи! (${currentAnswer})`, false);
+                input.classList.add('incorrect', 'shake');
+            }
+
+            updateScore();
+            isAnimating = true;
+
+            setTimeout(() => {
+                input.classList.remove('correct', 'incorrect', 'shake');
+                getRandomNumbers();
+                updateProblem();
+                isAnimating = false;
+            }, 1500);
+        };
+
+        // Инициализация
+        getRandomNumbers();
+        updateProblem();
+
+        // Обработчики событий
+        button.addEventListener('click', checkAnswer);
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkAnswer();
+        });
+    </script>
+</body>
+</html>

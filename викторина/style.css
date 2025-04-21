@@ -1,0 +1,79 @@
+body {
+    font-family: 'Rubik', sans-serif;
+    background: linear-gradient(to right, #a275ebf1, #2575fc);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0; /* Убираем отступы по умолчанию */
+    padding: 0; /* Убираем внутренние отступы по умолчанию */
+}
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+}
+
+.quiz-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#question {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+#answers {
+    display: flex;
+    flex-direction: column; /* Вертикальное расположение */
+    align-items: stretch; /* Растягиваем кнопки на всю ширину контейнера */
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 15px 30px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 8px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Кнопки занимают всю доступную ширину */
+}
+
+button:hover {
+    background-color: #367c39;
+    transform: translateY(-2px); /* Небольшой эффект подъема при наведении */
+}
+
+#submit {
+    background-color: #f44336; /* Красный цвет для кнопки submit */
+}
+
+#submit:hover {
+    background-color: #d32f2f; /* Более темный оттенок при наведении */
+}
+
+#result {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}

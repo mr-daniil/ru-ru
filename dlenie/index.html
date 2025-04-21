@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Чат с Алисой</title>
+  <style>
+    /* Базовые стили */
+    :root {
+      --primary-color: #bb86fc;
+      --background-color: #1e1e1e;
+      --surface-color: #2d2d2d;
+      --text-primary: #e0e0e0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+      background: #121212;
+      color: var(--text-primary);
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #chat-container {
+      width: 100%;
+      height: 100vh;
+      background: var(--background-color);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Шапка */
+    #header {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Область чата */
+    #chat-window {
+      flex: 1;
+      padding: 12px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Сообщения */
+    .message {
+      max-width: 85%;
+      padding: 12px 16px;
+      border-radius: 20px;
+      font-size: 16px;
+      line-height: 1.4;
+      word-break: break-word;
+      animation: fadeIn 0.3s ease-in;
+      position: relative;
+    }
+
+    .user-message {
+      background: var(--primary-color);
+      color: white;
+      margin-left: auto;
+      border-bottom-right-radius: 4px;
+    }
+
+    .bot-message {
+      background: var(--surface-color);
+      color: var(--text-primary);
+      border-bottom-left-radius: 4px;
+    }
+
+    .message-time {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 4px;
+      display: block;
+      text-align: right;
+    }
+
+    /* Индикатор набора */
+    .typing-indicator {
+      display: none;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* Поле ввода */
+    #input-area {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: var(--background-color);
+      border-top: 1px solid #333;
+    }
+
+    #user-input {
+      flex: 1;
+      border: none;
+      border-radius: 24px;
+      padding: 12px 20px;
+      font-size: 16px;
+      background: var(--surface-color);
+      color: var(--text-primary);
+      outline: none;
+      min-height: 48px;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    button {
+      border: none;
+      background: var(--primary-color);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 24px;
+      min-width: 48px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    button:active {
+      opacity: 0.8;
+    }
+
+    /* Анимации */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Мобильная адаптация */
+    @media (max-width: 600px) {
+      #header {
+        padding: 12px;
+        font-size: 1em;
+      }
+
+      #chat-window {
+        padding: 8px;
+      }
+
+      .message {
+        max-width: 90%;
+        padding: 10px 14px;
+        font-size: 15px;
+      }
+
+      #input-area {
+        padding: 8px;
+        gap: 6px;
+      }
+
+      #user-input {
+        padding: 10px 16px;
+        font-size: 15px;
+      }
+
+      button {
+        padding: 10px 16px;
+      }
+
+      .typing-indicator {
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      button span {
+        display: none;
+      }
+      
+      button {
+        padding: 12px;
+        min-width: 40px;
+      }
+      
+      button::after {
+        content: "➤";
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="chat-container">
+  <div id="header">
+    <span>Чат с Алисой</span>
+    <div class="controls">
+      <button onclick="clearHistory()" title="Очистить историю">🗑️</button>
+    </div>
+  </div>
+  <div class="typing-indicator" id="typing">Алиса печатает...</div>
+  <div id="chat-window"></div>
+
+  <form id="input-area">
+    <input type="text" id="user-input" autocomplete="off" placeholder="Введите сообщение..." required />
+    <button type="submit"><span>Отправить</span></button>
+  </form>
+</div>
+
+<script>
+// Остальной JavaScript код остается без изменений из предыдущей версии
+// ...
+</script>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Даниил Жарков - Веб-разработчик</title>
+    <style>
+        :root {
+            --primary-bg: #f4f4f4;
+            --primary-text: #333;
+            --header-bg: #35424a;
+            --nav-bg: #e8491d;
+            --sidebar-bg: #e6e6e6;
+            --link-color: #e8491d;
+        }
+
+        .dark-theme {
+            --primary-bg: #1a1a1a;
+            --primary-text: #e6e6e6;
+            --header-bg: #1a2b33;
+            --nav-bg: #c23812;
+            --sidebar-bg: #2d2d2d;
+            --link-color: #ff6b4a;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--primary-text);
+            background-color: var(--primary-bg);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--header-bg);
+            color: #ffffff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav {
+            background: var(--nav-bg);
+            padding: 10px 0;
+        }
+
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px 0;
+        }
+
+        #showcase {
+            min-height: 300px;
+            background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
+            text-align: center;
+            color: #ffffff;
+            padding: 100px 20px;
+        }
+
+        #main {
+            float: left;
+            width: 70%;
+            padding: 0 30px;
+            box-sizing: border-box;
+        }
+
+        #sidebar {
+            float: right;
+            width: 30%;
+            background: var(--sidebar-bg);
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: var(--header-bg);
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+            clear: both;
+        }
+
+        .theme-switcher, .best-project {
+            background: none;
+            border: 2px solid white;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .theme-switcher:hover, .best-project:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        @media(max-width: 768px) {
+            #main, #sidebar {
+                width: 100%;
+                float: none;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+            }
+            
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+        a {
+            color: var(--link-color);
+            transition: color 0.3s;
+        }
+        
+        .profile-img {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .profile-img img {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Даниил Жарков</h1>
+            <h2>Веб-разработчик</h2>
+        </div>
+    </header>
+   
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="portfolio.html">Портфолио</a></li>
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+                <li><a href="bot/index.html" class="best-project">★ Мой лучший проект (Алиса)</a></li>
+                <li><button class="theme-switcher" onclick="toggleTheme()">🌓 Сменить тему</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="profile-img">
+        <img src="cVwR9f5Fhu8.jpg" width="350" height="500" alt="Даниил Жарков">
+    </div>
+
+    <div class="container">
+        <section id="main">
+            <h1>Добро пожаловать</h1>
+            <p>Меня зовут Даниил Жарков, я веб-разработчик с опытом создания веб-приложений и сайтов.</p>
+        </section>
+
+        <aside id="sidebar">
+            <h3>Мои навыки</h3>
+            <ul>
+                <li>HTML, CSS, JavaScript</li>
+            </ul>
+            <h3>Мои последние проекты</h3>
+            <p><a href="temp/index.html">Тренажер по умножению</a></p>
+            <p><a href="temp/index01.html">Контрольная работа по умножению</a></p>
+            <p><a href="temp/index911.html">Тренажер по сложению</a></p>
+            <p><a href="dlenie/index.html">Тренажер по делению</a></p>
+            <p><a href="vcht/index-vcht.html">Тренажер по вычитанию</a></p>
+        </aside>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>Даниил Жарков &copy; 2025 | Веб-разработчик</p>
+            <p>Свяжитесь со мной: <a href="mailto:d.d.zharkov40@gmail.com">d.d.zharkov40@gmail.com</a></p>
+            <p>
+                <a href="https://github.com/mr-daniil" target="_blank">GitHub</a> | 
+                <a href="https://vk.com/mr_zharik" target="_blank">ВКонтакте</a> | 
+                <a href="https://instagram.com/mr_zharik" target="_blank">Instagram</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Проверяем сохраненную тему в localStorage
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.classList.add(savedTheme);
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            
+            // Сохраняем выбранную тему
+            const currentTheme = document.body.classList.contains('dark-theme') ? 'dark-theme' : '';
+            localStorage.setItem('theme', currentTheme);
+        }
+    </script>
+</body>
+</html>
